@@ -1,4 +1,4 @@
-package job4j.cars;
+package ru.job4j.cars;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

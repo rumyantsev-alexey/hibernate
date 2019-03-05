@@ -1,11 +1,11 @@
-package job4j.cars;
+package ru.job4j.cars;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "model")
-public class ModelEntity implements ProjectCars {
+@Table(name = "city")
+public class CityEntity implements ProjectCars {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,20 +15,19 @@ public class ModelEntity implements ProjectCars {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne (cascade = {CascadeType.REFRESH})
-    @JoinColumn(name = "mark_id")
-    private MarkEntity mark;
+    @OneToMany(mappedBy = "city", fetch = FetchType.EAGER)
+    private Set<UsersEntity> user;
 
-    @OneToMany(mappedBy = "model", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "city", fetch = FetchType.EAGER)
     private Set<CarEntity> car;
 
-    public ModelEntity() {
+
+    public CityEntity() {
 
     }
 
-    public ModelEntity(String name, MarkEntity mark) {
+    public CityEntity(final String name) {
         this.name = name;
-        this.mark = mark;
     }
 
     public Set<CarEntity> getCar() {
@@ -39,12 +38,12 @@ public class ModelEntity implements ProjectCars {
         this.car = car;
     }
 
-    public MarkEntity getMark() {
-        return mark;
+    public Set<UsersEntity> getUser() {
+        return user;
     }
 
-    public void setMark(MarkEntity mark) {
-        this.mark = mark;
+    public void setUser(Set<UsersEntity> user) {
+        this.user = user;
     }
 
     public int getId() {
@@ -72,18 +71,14 @@ public class ModelEntity implements ProjectCars {
             return false;
         }
 
-        ModelEntity that = (ModelEntity) o;
+        CityEntity that = (CityEntity) o;
 
-        if (name != null ? !name.equals(that.name) : that.name != null) {
-            return false;
-        }
-        return mark != null ? mark.equals(that.mark) : that.mark == null;
+        return name != null ? name.equals(that.name) : that.name == null;
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (mark != null ? mark.hashCode() : 0);
-        return result;
+        return name != null ? name.hashCode() : 0;
     }
+
 }

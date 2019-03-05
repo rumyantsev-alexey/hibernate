@@ -8,7 +8,7 @@
 
     <servlet>
         <servlet-name>ImageServlet</servlet-name>
-        <servlet-class>job4j.cars.ImageServlet</servlet-class>
+        <servlet-class>ru.job4j.cars.ImageServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -18,7 +18,7 @@
 
     <servlet>
         <servlet-name>CarServlet</servlet-name>
-        <servlet-class>job4j.cars.CarServlet</servlet-class>
+        <servlet-class>ru.job4j.cars.CarServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -28,7 +28,7 @@
 
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>job4j.cars.LoginServlet</servlet-class>
+        <servlet-class>ru.job4j.cars.LoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -38,7 +38,7 @@
 
     <servlet>
         <servlet-name>ListServlet</servlet-name>
-        <servlet-class>job4j.cars.ListServlet</servlet-class>
+        <servlet-class>ru.job4j.cars.ListServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -48,7 +48,7 @@
 
     <servlet>
         <servlet-name>AddServlet</servlet-name>
-        <servlet-class>job4j.cars.AddServlet</servlet-class>
+        <servlet-class>ru.job4j.cars.AddServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -58,7 +58,7 @@
 
     <filter>
         <filter-name>LoginFilter</filter-name>
-        <filter-class>job4j.cars.LoginFilter</filter-class>
+        <filter-class>ru.job4j.cars.LoginFilter</filter-class>
     </filter>
 
     <filter-mapping>

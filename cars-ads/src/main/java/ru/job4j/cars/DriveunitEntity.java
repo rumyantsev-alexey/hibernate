@@ -1,11 +1,11 @@
-package job4j.cars;
+package ru.job4j.cars;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "city")
-public class CityEntity implements ProjectCars {
+@Table(name = "driveunit")
+public class DriveunitEntity implements ProjectCars {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,18 +15,14 @@ public class CityEntity implements ProjectCars {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "city", fetch = FetchType.EAGER)
-    private Set<UsersEntity> user;
-
-    @OneToMany(mappedBy = "city", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "dunit", fetch = FetchType.EAGER)
     private Set<CarEntity> car;
 
-
-    public CityEntity() {
+    public DriveunitEntity() {
 
     }
 
-    public CityEntity(final String name) {
+    public DriveunitEntity(String name) {
         this.name = name;
     }
 
@@ -36,14 +32,6 @@ public class CityEntity implements ProjectCars {
 
     public void setCar(Set<CarEntity> car) {
         this.car = car;
-    }
-
-    public Set<UsersEntity> getUser() {
-        return user;
-    }
-
-    public void setUser(Set<UsersEntity> user) {
-        this.user = user;
     }
 
     public int getId() {
@@ -71,7 +59,7 @@ public class CityEntity implements ProjectCars {
             return false;
         }
 
-        CityEntity that = (CityEntity) o;
+        DriveunitEntity that = (DriveunitEntity) o;
 
         return name != null ? name.equals(that.name) : that.name == null;
     }
@@ -80,5 +68,4 @@ public class CityEntity implements ProjectCars {
     public int hashCode() {
         return name != null ? name.hashCode() : 0;
     }
-
 }

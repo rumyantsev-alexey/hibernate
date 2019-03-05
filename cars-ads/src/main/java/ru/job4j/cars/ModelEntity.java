@@ -1,11 +1,11 @@
-package job4j.cars;
+package ru.job4j.cars;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "driveunit")
-public class DriveunitEntity implements ProjectCars {
+@Table(name = "model")
+public class ModelEntity implements ProjectCars {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,15 +15,20 @@ public class DriveunitEntity implements ProjectCars {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "dunit", fetch = FetchType.EAGER)
+    @ManyToOne (cascade = {CascadeType.REFRESH})
+    @JoinColumn(name = "mark_id")
+    private MarkEntity mark;
+
+    @OneToMany(mappedBy = "model", fetch = FetchType.EAGER)
     private Set<CarEntity> car;
 
-    public DriveunitEntity() {
+    public ModelEntity() {
 
     }
 
-    public DriveunitEntity(String name) {
+    public ModelEntity(String name, MarkEntity mark) {
         this.name = name;
+        this.mark = mark;
     }
 
     public Set<CarEntity> getCar() {
@@ -32,6 +37,14 @@ public class DriveunitEntity implements ProjectCars {
 
     public void setCar(Set<CarEntity> car) {
         this.car = car;
+    }
+
+    public MarkEntity getMark() {
+        return mark;
+    }
+
+    public void setMark(MarkEntity mark) {
+        this.mark = mark;
     }
 
     public int getId() {
@@ -59,13 +72,18 @@ public class DriveunitEntity implements ProjectCars {
             return false;
         }
 
-        DriveunitEntity that = (DriveunitEntity) o;
+        ModelEntity that = (ModelEntity) o;
 
-        return name != null ? name.equals(that.name) : that.name == null;
+        if (name != null ? !name.equals(that.name) : that.name != null) {
+            return false;
+        }
+        return mark != null ? mark.equals(that.mark) : that.mark == null;
     }
 
     @Override
     public int hashCode() {
-        return name != null ? name.hashCode() : 0;
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (mark != null ? mark.hashCode() : 0);
+        return result;
     }
 }

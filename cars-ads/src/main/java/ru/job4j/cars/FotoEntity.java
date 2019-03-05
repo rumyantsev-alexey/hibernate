@@ -1,11 +1,10 @@
-package job4j.cars;
+package ru.job4j.cars;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "transmission")
-public class TransmissionEntity implements ProjectCars {
+@Table(name = "foto")
+public class FotoEntity implements ProjectCars {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,22 +14,19 @@ public class TransmissionEntity implements ProjectCars {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "trans", fetch = FetchType.EAGER)
-    private Set<CarEntity> car;
+    @Lob
+    @Column(name = "foto")
+    private byte[] foto;
 
-    public TransmissionEntity() {
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "car_id")
+    private CarEntity car;
 
-    }
-
-    public TransmissionEntity(String name) {
-        this.name = name;
-    }
-
-    public Set<CarEntity> getCar() {
+    public CarEntity getCar() {
         return car;
     }
 
-    public void setCar(Set<CarEntity> car) {
+    public void setCar(CarEntity car) {
         this.car = car;
     }
 
@@ -50,6 +46,14 @@ public class TransmissionEntity implements ProjectCars {
         this.name = name;
     }
 
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -59,7 +63,7 @@ public class TransmissionEntity implements ProjectCars {
             return false;
         }
 
-        TransmissionEntity that = (TransmissionEntity) o;
+        FotoEntity that = (FotoEntity) o;
 
         return name != null ? name.equals(that.name) : that.name == null;
     }
@@ -68,4 +72,5 @@ public class TransmissionEntity implements ProjectCars {
     public int hashCode() {
         return name != null ? name.hashCode() : 0;
     }
+
 }

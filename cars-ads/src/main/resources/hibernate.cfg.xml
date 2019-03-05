@@ -11,17 +11,17 @@
         <property name="hibernate.show_sql">true</property>
 
         <!--        <mapping resource="cars/all-for-car.xml"/> -->
-        <mapping class="job4j.cars.BodytypeEntity"/>
-        <mapping class="job4j.cars.CarEntity"/>
-        <mapping class="job4j.cars.CityEntity"/>
-        <mapping class="job4j.cars.DriveunitEntity"/>
-        <mapping class="job4j.cars.EnginestypeEntity"/>
-        <mapping class="job4j.cars.FotoEntity"/>
-        <mapping class="job4j.cars.MarkEntity"/>
-        <mapping class="job4j.cars.ModelEntity"/>
-        <mapping class="job4j.cars.TransmissionEntity"/>
-        <mapping class="job4j.cars.UsersEntity"/>
-        <mapping class="job4j.cars.WheelEntity"/>
+        <mapping class="ru.job4j.cars.BodytypeEntity"/>
+        <mapping class="ru.job4j.cars.CarEntity"/>
+        <mapping class="ru.job4j.cars.CityEntity"/>
+        <mapping class="ru.job4j.cars.DriveunitEntity"/>
+        <mapping class="ru.job4j.cars.EnginestypeEntity"/>
+        <mapping class="ru.job4j.cars.FotoEntity"/>
+        <mapping class="ru.job4j.cars.MarkEntity"/>
+        <mapping class="ru.job4j.cars.ModelEntity"/>
+        <mapping class="ru.job4j.cars.TransmissionEntity"/>
+        <mapping class="ru.job4j.cars.UsersEntity"/>
+        <mapping class="ru.job4j.cars.WheelEntity"/>
 
     </session-factory>
 </hibernate-configuration>

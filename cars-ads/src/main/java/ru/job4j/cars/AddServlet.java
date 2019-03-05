@@ -1,4 +1,4 @@
-package job4j.cars;
+package ru.job4j.cars;
 
 import org.apache.commons.io.IOUtils;
 

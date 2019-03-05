@@ -1,4 +1,4 @@
-package job4j.cars;
+package ru.job4j.cars;
 
 /**
  * Маркерный интерфейс для сущностей проекта

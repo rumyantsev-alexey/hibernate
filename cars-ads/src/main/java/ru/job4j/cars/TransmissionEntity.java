@@ -1,11 +1,11 @@
-package job4j.cars;
+package ru.job4j.cars;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "wheel")
-public class WheelEntity implements ProjectCars {
+@Table(name = "transmission")
+public class TransmissionEntity implements ProjectCars {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,14 +15,14 @@ public class WheelEntity implements ProjectCars {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "wheel", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "trans", fetch = FetchType.EAGER)
     private Set<CarEntity> car;
 
-    public WheelEntity() {
+    public TransmissionEntity() {
 
     }
 
-    public WheelEntity(String name) {
+    public TransmissionEntity(String name) {
         this.name = name;
     }
 
@@ -59,7 +59,7 @@ public class WheelEntity implements ProjectCars {
             return false;
         }
 
-        WheelEntity that = (WheelEntity) o;
+        TransmissionEntity that = (TransmissionEntity) o;
 
         return name != null ? name.equals(that.name) : that.name == null;
     }
