@@ -103,9 +103,20 @@
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>3.6.2</version>
                 <configuration>
-                    <changeLogFile>/src/main/resources/changelog-install.xml</changeLogFile>
-                    <propertyFile>/src/main/resources/liquibase.properties</propertyFile>
+                    <changeLogFile>${basedir}/src/main/resources/changelog-install.xml</changeLogFile>
+                    <url>${db.url}</url>
+                    <driver>${db.driver}</driver>
+                    <username>${db.username}</username>
+                    <password>${db.password}</password>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
