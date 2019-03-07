@@ -3,6 +3,12 @@ language: java
 # используем режим обычного пользователя для сборки проекта.
 sudo: false
 
+services:
+- postgresql
+
+before_install:
+- psql -c 'create database cars;' -U postgres
+
 # после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # Здесь используется сторонни сервис https://codecov.io/
 after_success:
@@ -12,7 +18,7 @@ env:
   global:
     - CODECOV_TOKEN="e5ea4254-a37a-4bcf-b6ef-8d25c83a5ac5"
 
-    # Отправлять уведомление на почту youremail@smtp.ru (Изменить на свою) если сборка   упала
+# Отправлять уведомление на почту youremail@smtp.ru (Изменить на свою) если сборка   упала
 notifications:
   email:
     recipients:
