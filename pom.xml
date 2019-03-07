@@ -108,18 +108,18 @@
 				<db.driver>org.postgresql.Driver</db.driver>
 			</properties>
 		</profile>
+		<profile>
+			<id>travis</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<db.url>jdbc:postgresql://localhost/cars</db.url>
+				<db.username>postgres</db.username>
+				<db.password></db.password>
+				<db.driver>org.postgresql.Driver</db.driver>
+			</properties>
+		</profile>
 	</profiles>
-	<profile>
-		<id>travis</id>
-		<activation>
-			<activeByDefault>true</activeByDefault>
-		</activation>
-		<properties>
-			<db.url>jdbc:postgresql://localhost/cars</db.url>
-			<db.username>postgres</db.username>
-			<db.password></db.password>
-			<db.driver>org.postgresql.Driver</db.driver>
-		</properties>
-	</profile>
 
 </project>
