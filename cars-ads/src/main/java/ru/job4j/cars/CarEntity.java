@@ -198,6 +198,7 @@ public class CarEntity implements ProjectCars {
         this.wheel = wheel;
     }
 
+    @Override
     public int getId() {
         return id;
     }

@@ -30,6 +30,7 @@ public class FotoEntity implements ProjectCars {
         this.car = car;
     }
 
+    @Override
     public int getId() {
         return id;
     }

@@ -46,6 +46,7 @@ public class CityEntity implements ProjectCars {
         this.user = user;
     }
 
+    @Override
     public int getId() {
         return id;
     }

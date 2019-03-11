@@ -96,17 +96,9 @@ public class AddServlet extends HttpServlet {
     }
 
     private void findAll(Class<? extends ProjectCars> genclass, HttpServletRequest req) {
-        String[] names = genclass.getName().split("\\.");
-        String entityname = names[names.length - 1];
-        Class cls = null;
-        try {
-            cls = genclass.newInstance().getClass();
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        DbStore db = new DbStore<>(cls);
+        DbStore db = new DbStore<>(genclass);
         ArrayList lst = db.findAll();
-        req.setAttribute(entityname + "List", lst);
+        req.setAttribute(db.getEntityname() + "List", lst);
     }
 
 }

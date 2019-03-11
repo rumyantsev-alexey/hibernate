@@ -34,6 +34,7 @@ public class WheelEntity implements ProjectCars {
         this.car = car;
     }
 
+    @Override
     public int getId() {
         return id;
     }

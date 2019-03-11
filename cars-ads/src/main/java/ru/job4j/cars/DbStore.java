@@ -15,20 +15,24 @@ import java.util.function.Function;
  * Класс реализует интерфейс Store для hibernate-реализации
  * @param <K> дженерик класс сущностей используемых в этом проекте
  */
-public class DbStore<K> implements Store<K> {
+public class DbStore<K extends ProjectCars> implements Store<K> {
 
     private final SessionFactory factory = HibernateSessionFactory.getSessionFactory();
     private final String entityname;
-    private final String fullclass;
+    private final Class<K> fullclass;
 
     /**
-     * Конструктор с определением полного и сокращенного имени класса
+     * Конструктор с определением сокращенного имени класса
      * @param genclass
      */
-    public DbStore(Class<? extends ProjectCars> genclass) {
-        fullclass = genclass.getName();
-        String[] names = fullclass.split("\\.");
+    public DbStore(Class<K> genclass) {
+        fullclass = genclass;
+        String[] names =  genclass.getName().split("\\.");
         entityname = names[names.length - 1];
+    }
+
+    public String getEntityname() {
+        return entityname;
     }
 
     @Override
@@ -80,13 +84,7 @@ public class DbStore<K> implements Store<K> {
     public K findById(int id) {
         return this.tx(
                 session -> {
-                    Class<?> name = null;
-                    try {
-                        name = Class.forName(fullclass);
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    return (K) session.get(name, id);
+                    return (K) session.get(fullclass, id);
                 }
         );
     }
@@ -97,12 +95,7 @@ public class DbStore<K> implements Store<K> {
         ArrayList<K> temp = this.findAll();
         for (K one: temp) {
             if (one.equals(model)) {
-                try {
-                    Method getNameMethod = one.getClass().getMethod("getId");
-                    result = (Integer) getNameMethod.invoke(one);
-                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
+                result = one.getId();
             }
         }
         return result;

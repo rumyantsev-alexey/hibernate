@@ -45,6 +45,7 @@ public class MarkEntity implements ProjectCars {
         this.model = model;
     }
 
+    @Override
     public int getId() {
         return id;
     }

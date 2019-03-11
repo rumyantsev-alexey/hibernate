@@ -34,6 +34,7 @@ public class BodytypeEntity implements ProjectCars {
         this.car = car;
     }
 
+    @Override
     public int getId() {
         return id;
     }
