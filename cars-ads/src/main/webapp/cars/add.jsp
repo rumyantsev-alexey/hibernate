@@ -23,7 +23,7 @@
                     type: "POST",
                     url: "/cars/list",
                     contentType: 'application/json',
-                    data:JSON.stringify({mark:$("#mark").val()}),
+                    data:JSON.stringify({action:"mark", mark:$("#mark").val()}),
                     success: function(data, textStatus, jqXHR){
                         mlist = jQuery.parseJSON(jqXHR.responseText);
                         $("#model").html("");

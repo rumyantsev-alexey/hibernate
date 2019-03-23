@@ -6,8 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.function.Function;
 
@@ -101,7 +99,7 @@ public class DbStore<K extends ProjectCars> implements Store<K> {
         return result;
     }
 
-    private <T> T tx(final Function<Session, T> command) {
+    protected <T> T tx(final Function<Session, T> command) {
         T result = null;
         Session session = factory.openSession();
         Transaction transaction = null;
@@ -120,4 +118,5 @@ public class DbStore<K extends ProjectCars> implements Store<K> {
         }
         return result;
     }
+
 }

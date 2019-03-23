@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
  * город нахождения автомобиля, марка и модель авто
  */
 public class DBStoreTest {
-    Store<CarEntity> carsdb = new DbStore<>(CarEntity.class);
+    Store<CarEntity> carsdb = new CarsDbStore();
     CarEntity car = null;
 
     @Before

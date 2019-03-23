@@ -16,7 +16,6 @@
             var state;
             jQuery(document).ready(function() {
                 state = $("#check").prop("checked");
-                console.log(state);
             });
 
             function checkFun() {
