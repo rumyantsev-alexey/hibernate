@@ -96,10 +96,10 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<db.url>jdbc:postgresql://127.0.0.1:5432/cars</db.url>
-				<db.username>postgres</db.username>
-				<db.password>tester</db.password>
-				<db.driver>org.postgresql.Driver</db.driver>
+				<db.url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</db.url>
+				<db.username>sa</db.username>
+				<db.password></db.password>
+				<db.driver>org.h2.Driver</db.driver>
 			</properties>
 		</profile>
 		<profile>
@@ -114,10 +114,10 @@
 		<profile>
 			<id>travis</id>
 			<properties>
-				<db.url>jdbc:postgresql://localhost/cars</db.url>
-				<db.username>postgres</db.username>
+				<db.url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</db.url>
+				<db.username>sa</db.username>
 				<db.password></db.password>
-				<db.driver>org.postgresql.Driver</db.driver>
+				<db.driver>org.h2.Driver</db.driver>
 			</properties>
 		</profile>
 	</profiles>
