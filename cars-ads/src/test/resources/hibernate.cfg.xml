@@ -10,7 +10,6 @@
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
         <property name="hibernate.show_sql">true</property>
 
-        <!--        <mapping resource="cars/all-for-car.xml"/> -->
         <mapping class="ru.job4j.cars.BodytypeEntity"/>
         <mapping class="ru.job4j.cars.CarEntity"/>
         <mapping class="ru.job4j.cars.CityEntity"/>

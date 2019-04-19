@@ -1,8 +1,13 @@
 package ru.job4j.cars;
 
+import org.hibernate.SessionFactory;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ru.job4j.cars.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -14,34 +19,17 @@ import static org.junit.Assert.assertThat;
  * город нахождения автомобиля, марка и модель авто
  */
 public class DBStoreTest {
-    Store<CarEntity> carsdb = new CarsDbStore();
-    CarEntity car = null;
-
-    @Before
-    /**
-     * Метод создает сущность объявления для тестов
-     */
-    public void createCarEntity() {
-        car = new CarEntity("test");
-        Store<CityEntity> citydb = new DbStore<>(CityEntity.class);
-        Store<UsersEntity> userdb = new DbStore<>(UsersEntity.class);
-        Store<MarkEntity> markdb = new DbStore<>(MarkEntity.class);
-        Store<ModelEntity> modeldb = new DbStore<>(ModelEntity.class);
-        car.setCity(citydb.findById(1));
-        car.setUser(userdb.findById(1));
-        car.setModel(modeldb.findById(1));
-        car.setMark(markdb.findById(1));
-    }
+    private CarsDbStore carsdb = new CarsDbStore();
 
     @Test
     /**
      * Метод проверяет добавление сущности в хранилище
      */
     public void addEntityTest() {
+        CarEntity car = new CarEntity("test");
         int idx = carsdb.add(car);
         car = carsdb.findById(idx);
         assertThat(car.getNote(), is("test"));
-        carsdb.delete(idx);
     }
 
     @Test
@@ -49,13 +37,12 @@ public class DBStoreTest {
      * Метод проверяет изменение сущности в хранилище
      */
     public void updateEntityTest() {
-        car.setNote("test2");
+        CarEntity car = new CarEntity("test");
         int idx = carsdb.add(car);
         car.setNote("test3");
         carsdb.update(car);
         car = carsdb.findById(idx);
         assertThat(car.getNote(), is("test3"));
-        carsdb.delete(idx);
     }
 
     @Test
@@ -63,10 +50,76 @@ public class DBStoreTest {
      * Метод проверяет удаление сущности из хранилище
      */
     public void deleteEntityTest() {
-        car.setNote("test4");
+        CarEntity car = new CarEntity("test");
         int idx = carsdb.add(car);
         carsdb.delete(idx);
         assertThat(carsdb.findById(idx), is(nullValue()));
     }
 
+    @Test
+    /**
+     * Метод проверяет поиск всех сущностей
+     */
+    public void findAllEntityTest() {
+        CarEntity car = new CarEntity("test");
+        CarEntity car2 = new CarEntity("note2");
+        carsdb.add(car);
+        carsdb.add(car2);
+        ArrayList<CarEntity> result = carsdb.findAll();
+        assertThat(result.size(), is(2));
+    }
+
+    @Test
+    /**
+     * Метод проверяет поиск сущности по ее id
+     */
+    public void findByIdEntityTest() {
+        CarEntity car = new CarEntity("test");
+        int idx = carsdb.add(car);
+        CarEntity car2 = carsdb.findById(idx);
+        assertThat(car2, is(car));
+    }
+
+    @Test
+    /**
+     * Метод проверяет поиск id сущности по самой сущности
+     */
+    public void findByModekEntityTest() {
+        CarEntity car = new CarEntity("test");
+        int idx = carsdb.add(car);
+        assertThat(carsdb.findIdByModel(car), is(idx));
+    }
+
+    @Test
+    /**
+     * Метод проверяет получение имени сущности
+     */
+    public void getEntityNameTest() {
+        assertThat(carsdb.getEntityname(), is("CarEntity"));
+    }
+
+    @Test
+    /**
+     * Метод проверяет использование фильтра списка объявлений
+     */
+    public void findAllCarsWithFiterTest() {
+        CarEntity car = new CarEntity("test");
+        Store<MarkEntity> markdb = new DbStore<>(MarkEntity.class);
+        markdb.add(new MarkEntity("djdjdjdjd"));
+        car.setMark(markdb.findById(1));
+        carsdb.add(car);
+        carsdb.add(new CarEntity("car2"));
+        carsdb.add(new CarEntity("car3"));
+        List<String> filters = Arrays.asList("selectmark", "djdjdjdjd");
+        List<CarEntity> result = carsdb.findAllCarsWithFilter(filters);
+        assertThat(result.size(), is(1));
+    }
+
+    @After
+    public void afterDo() {
+        List<CarEntity> all = carsdb.findAll();
+        for (CarEntity c: all) {
+            carsdb.delete(c.getId());
+        }
+    }
 }

@@ -29,7 +29,7 @@ public class DbStore<K extends ProjectCars> implements Store<K> {
         entityname = names[names.length - 1];
     }
 
-    public String getEntityname() {
+    protected String getEntityname() {
         return entityname;
     }
 
