@@ -14,20 +14,33 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-all</artifactId>
+			<artifactId>hamcrest-core</artifactId>
 			<version>1.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
 	<modules>
 		<module>cars-ads</module>
+		<module>cars-ads-jp2</module>
 	</modules>
 
 	<build>
@@ -44,6 +57,14 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.0.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.2</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -88,38 +109,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<profiles>
-		<profile>
-			<id>test</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<db.url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</db.url>
-				<db.username>sa</db.username>
-				<db.password></db.password>
-				<db.driver>org.h2.Driver</db.driver>
-			</properties>
-		</profile>
-		<profile>
-			<id>production</id>
-			<properties>
-				<db.url>jdbc:postgresql://127.0.0.1:5432/cars</db.url>
-				<db.username>postgres</db.username>
-				<db.password>tester</db.password>
-				<db.driver>org.postgresql.Driver</db.driver>
-			</properties>
-		</profile>
-		<profile>
-			<id>travis</id>
-			<properties>
-				<db.url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</db.url>
-				<db.username>sa</db.username>
-				<db.password></db.password>
-				<db.driver>org.h2.Driver</db.driver>
-			</properties>
-		</profile>
-	</profiles>
 
 </project>

@@ -1,10 +1,10 @@
-package ru.job4j.cars;
+package ru.job4j.cars2;
 
-import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
+import javax.persistence.EntityManagerFactory;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
  */
 public class ServletTest {
 
-    private final SessionFactory factory = HibernateSessionFactory.getSessionFactory();
+    private final EntityManagerFactory factory = EntityManagerFactorySigl.getEntityManagerFactory();
     private CarsDbStore carsdb = new CarsDbStore();
 
     /**
@@ -78,7 +78,7 @@ public class ServletTest {
         HttpSession sess = mock(HttpSession.class);
 
         DbStore<UsersEntity> dbu = new DbStore<>(UsersEntity.class);
-        int idx = dbu.add(new UsersEntity("test", "123", "wwww", new CityEntity("test")));
+        int idx = dbu.add(new UsersEntity("test", "123", "wwww"));
 
         when(req.getSession()).thenReturn(sess);
         when(req.getParameter("note")).thenReturn("test");
