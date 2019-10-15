@@ -110,8 +110,7 @@ public class DbStore<K extends ProjectCars> implements Store<K> {
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
-                e.printStackTrace();
-            }
+             }
             e.printStackTrace();
         } finally {
             session.close();
